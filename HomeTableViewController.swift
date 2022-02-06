@@ -51,7 +51,7 @@ class HomeTableViewController: UITableViewController {
         let myUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json"
         
         numberOfTweet = numberOfTweet + 20
-        let myParams = ["counts": numberOfTweet]
+        let myParams = ["count": numberOfTweet]
         TwitterAPICaller.client?.getDictionariesRequest(url: myUrl, parameters: myParams, success: { (tweets: [NSDictionary]) in
             
             self.tweetArray.removeAll()
@@ -60,6 +60,8 @@ class HomeTableViewController: UITableViewController {
             }
             
             self.tableView.reloadData()
+            self.myRefreshControl.endRefreshing()
+
 
         }, failure: { (Error) in
             print("Could not retreive tweets")
